@@ -1,9 +1,9 @@
-import Cards from "@/components/admin/dashboard/cards";
+import List from "@/components/admin/users/list";
 
 export default function Page() {
     return (
         <>
-            <Cards />
+            <List />
         </>
     )
 }

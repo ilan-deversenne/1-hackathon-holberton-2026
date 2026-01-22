@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Nunito_Sans } from "next/font/google";
 import "../globals.css";
 
+import { AppSidebar } from "@/components/admin/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+
 const nunitoSans = Nunito_Sans({variable:'--font-sans'});
 
 const geistSans = Geist({
@@ -29,7 +32,13 @@ export default function RootLayout({
       <body
         className={`dark ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SidebarProvider>
+          <AppSidebar />
+          <main className="flex-1 w-full p-3">
+            <SidebarTrigger />
+            {children}
+          </main>
+        </SidebarProvider>
       </body>
     </html>
   );
