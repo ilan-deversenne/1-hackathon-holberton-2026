@@ -71,24 +71,31 @@ export default function Page({ params }: PageProps) {
   function handleSubmit() {
     if (!quizz) return
 
+    let cc = 0
+    let tc = 0
+    const newResults: Record<string, 1 | 0> = {}
+
     quizz.fields.forEach((field, fieldIdx) => {
       field.responses.forEach((response, responseIdx) => {
         const key = `${fieldIdx}-${responseIdx}`
         const isChecked = selectedAnswers[key]
-        const isCorrect = response.correct === 1
-        const newResults: Record<string, 1 | 0> = {}
 
-        newResults[key] = 0
-        if (isChecked) {
-          setTotalChecked(totalChecked + 1)
-          if (isCorrect) {
-            setCorrectCount(correctCount + 1)
-            newResults[key] = 1
-          }
-          setResults(newResults)
+        if (!isChecked) return
+
+        tc++
+
+        if (response.correct === 1) {
+          cc++
+          newResults[key] = 1
+        } else {
+          newResults[key] = 0
         }
       })
     })
+
+    setCorrectCount(cc)
+    setTotalChecked(tc)
+    setResults(newResults)
   }
 
   if (!quizz) return null
