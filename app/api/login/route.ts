@@ -22,17 +22,10 @@ export async function POST(request: Request) {
 
     const hashed = hash("sha256", password)
 
-    const { data: user, error } = await supabase
-      .from('users')
-      .insert([
-        {
-          email: email,
-          username: username,
-          password: hashed,
-          role: 0
-        }
-      ])
-      .select()
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
       .single()
 
     if (error) {
@@ -42,7 +35,11 @@ export async function POST(request: Request) {
       )
     }
 
-    return NextResponse.json({ code: 0, message: "Success" }, { status: 201 })
+    if (data.password == hashed) {
+        return NextResponse.json({ code: 0, message: "Success" }, { status: 201 })
+    }
+
+    return NextResponse.json({ code: 1, error: "Incorrect email or password"  }, { status: 201 })
   } catch (error) {
     console.error('Error creating user:', error)
     return NextResponse.json(
