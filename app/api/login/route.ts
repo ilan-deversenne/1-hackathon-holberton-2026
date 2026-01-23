@@ -5,37 +5,17 @@ import { hash } from "crypto"
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { username, email, password, password2 } = body
+    const { email, password } = body
 
-    if (!username) {
-      return NextResponse.json(
-        { error: 'Username are required' },
-        { status: 400 }
-      )
-    }
     if (!email) {
       return NextResponse.json(
         { error: 'Email are required' },
         { status: 400 }
       )
     }
-    if (!password || !password2) {
+    if (!password) {
       return NextResponse.json(
-        { error: 'Password and confirm password are required' },
-        { status: 400 }
-      )
-    }
-
-    if (password != password2) {
-      return NextResponse.json(
-        { error: "Passwords do not match" },
-        { status: 400 }
-      )
-    }
-
-    if (password.length < 8) {
-      return NextResponse.json(
-        { error: "The password must contain at least 8 characters" },
+        { error: 'Password are required' },
         { status: 400 }
       )
     }
