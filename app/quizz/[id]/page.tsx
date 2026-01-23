@@ -99,15 +99,11 @@ export default function Page({ params }: PageProps) {
 
   if (!quizz) return null
 
-  function goBack() {
-    useEffect(() => {
-      window.history.back()
-    }, [])
-  }
-
   return (
     <div className="m-8 md:m-32">
-      <Button variant="secondary" className="md:hidden mb-6" onClick={goBack}>
+      <Button variant="secondary" className="md:hidden mb-6" onClick={() => {
+        window.history.back()
+       }}>
         <ArrowBigLeft />
       </Button>
 
