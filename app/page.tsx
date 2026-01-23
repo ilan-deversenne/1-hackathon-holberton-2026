@@ -1,3 +1,5 @@
+"use client"
+
 import { ComponentExample } from "@/components/component-example";
 import { useEffect } from "react";
 
