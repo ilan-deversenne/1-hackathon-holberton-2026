@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -20,7 +22,9 @@ export default function Login() {
           Enter your email below to login to your account
         </CardDescription>
         <CardAction>
-          <Button variant="link">Sign Up</Button>
+          <Button variant="link" onClick={() => {
+            window.location.href = "/register"
+          }}>Sign Up</Button>
         </CardAction>
       </CardHeader>
       <CardContent>
@@ -45,7 +49,7 @@ export default function Login() {
                   Forgot your password?
                 </a>
               </div>
-              <Input id="password" type="password" required />
+              <Input id="password" type="password" placeholder={"•".repeat(8)} required />
             </div>
           </div>
         </form>

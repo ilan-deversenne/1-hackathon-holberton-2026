@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -20,7 +22,9 @@ export default function Register() {
           Enter your email below to register to your account
         </CardDescription>
         <CardAction>
-          <Button variant="link">Sign In</Button>
+          <Button variant="link" onClick={() => {
+            window.location.href = "/login"
+          }}>Sign In</Button>
         </CardAction>
       </CardHeader>
       <CardContent>
