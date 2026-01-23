@@ -1,3 +1,13 @@
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
 const quizzes = [
     { id: 0, name: "Base HTML", description: "Grace a ce quizz apprendez les base en HTML" },
     { id: 1, name: "Base réseaux", description: "Grace a ce quizz apprendez les base en réseaux" }
@@ -12,10 +22,16 @@ export default function Quizz() {
 
                 {quizzes.map(quizz =>
 
-                    <div className="p-6 bg-secondary rounded-sm">
-                        <h1>{quizz.name}</h1>
-                        <p>{quizz.description}</p>
-                    </div>
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>{quizz.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <h2 className="mt-2">{quizz.description}</h2>
+                      </CardContent>
+                    </Card>
+                    
+ 
 
                 )}
 
