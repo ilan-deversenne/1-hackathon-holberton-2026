@@ -15,6 +15,8 @@ import {
   FieldLabel,
   FieldTitle,
 } from "@/components/ui/field"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { CheckCircle2Icon, InfoIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { use, useEffect, useState } from "react"
@@ -47,6 +49,8 @@ type PageProps = {
 
 export default function Page({ params }: PageProps) {
   const { id } = use(params)
+  const [correctCount, setCorrectCount] = useState<number>(0)
+  const [totalChecked, setTotalChecked] = useState<number>(0)
   const [quizz, setQuizz] = useState<Quiz | null>(null)
   const [results, setResults] = useState<Record<string, 1 | 0>>({})
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, boolean>>({})
@@ -67,9 +71,6 @@ export default function Page({ params }: PageProps) {
   function handleSubmit() {
     if (!quizz) return
 
-    let correctCount = 0
-    let totalChecked = 0
-
     quizz.fields.forEach((field, fieldIdx) => {
       field.responses.forEach((response, responseIdx) => {
         const key = `${fieldIdx}-${responseIdx}`
@@ -79,27 +80,32 @@ export default function Page({ params }: PageProps) {
 
         newResults[key] = 0
         if (isChecked) {
-          totalChecked++
+          setTotalChecked(totalChecked + 1)
           if (isCorrect) {
-            correctCount++
+            setCorrectCount(correctCount + 1)
             newResults[key] = 1
           }
           setResults(newResults)
         }
       })
     })
-
-    if (totalChecked === 0) {
-      alert('Please select at least one answer!')
-    } else {
-      alert(`Your score: ${correctCount}/${totalChecked} correct answers`)
-    }
   }
 
   if (!quizz) return null
 
   return (
     <div className="m-32">
+
+      {totalChecked > 0 ? (
+        <div className="mb-6 grid w-full max-w-md items-start gap-4 mx-auto">
+          <Alert>
+            <CheckCircle2Icon />
+            <AlertTitle>Quizz result</AlertTitle>
+            <AlertDescription>Correct {correctCount} / {totalChecked}</AlertDescription>
+          </Alert>
+        </div>
+      ): (<></>)}
+
       <Card className="mb-6 text-center">
         <CardHeader>
           <CardTitle className="text-2xl">{quizz.name}</CardTitle>

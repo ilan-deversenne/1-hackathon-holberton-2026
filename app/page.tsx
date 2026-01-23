@@ -1,5 +1,12 @@
 import { ComponentExample } from "@/components/component-example";
+import { useEffect } from "react";
 
 export default function Page() {
-return <ComponentExample />;
+    useEffect(() => {
+        window.location.href = '/quizz'
+    }, [])
+
+return (
+    <></>
+);
 }
