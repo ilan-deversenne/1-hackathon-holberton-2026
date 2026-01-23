@@ -33,7 +33,7 @@ export default function Quizz() {
 
   return (
     <>
-      <h1 className="mt-8 mb-8 text-2xl text-center">Choice a quizz</h1>
+      <h1 className="mt-8 mb-8 text-2xl text-center">Choose a quizz</h1>
       <div className="w-[80%] md:w-[65%] md:grid md:grid-cols-2 md:gap-6 mx-auto">
         {quizzes.map(quizz => (
           <Card
