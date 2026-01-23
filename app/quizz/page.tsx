@@ -34,11 +34,11 @@ export default function Quizz() {
   return (
     <>
       <h1 className="mt-8 mb-8 text-2xl text-center">Choice a quizz</h1>
-      <div className="w-[80%] grid grid-cols-3 gap-6 mx-auto">
+      <div className="w-[80%] md:w-[65%] md:grid md:grid-cols-2 md:gap-6 mx-auto">
         {quizzes.map(quizz => (
           <Card
             key={quizz.id}
-            className="hover:scale-105 cursor-pointer"
+            className="my-4 md:my-[0] hover:scale-105 cursor-pointer"
             onClick={() => {
               window.location.href = "/quizz/" + quizz.id
             }}

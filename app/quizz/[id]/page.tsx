@@ -10,13 +10,12 @@ import {
 import {
   Field,
   FieldContent,
-  FieldDescription,
   FieldGroup,
   FieldLabel,
   FieldTitle,
 } from "@/components/ui/field"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { CheckCircle2Icon, InfoIcon } from "lucide-react"
+import { ArrowBigLeft, CheckCircle2Icon, InfoIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { use, useEffect, useState } from "react"
@@ -100,11 +99,20 @@ export default function Page({ params }: PageProps) {
 
   if (!quizz) return null
 
+  function goBack() {
+    useEffect(() => {
+      window.history.back()
+    }, [])
+  }
+
   return (
-    <div className="m-32">
+    <div className="m-8 md:m-32">
+      <Button variant="secondary" className="md:hidden mb-6" onClick={goBack}>
+        <ArrowBigLeft />
+      </Button>
 
       {totalChecked > 0 ? (
-        <div className="mb-6 grid w-full max-w-md items-start gap-4 mx-auto">
+        <div className="mb-6 grid w-full max-w-xl md:max-w-md items-start gap-4 mx-auto">
           <Alert>
             <CheckCircle2Icon />
             <AlertTitle>Quizz result</AlertTitle>
@@ -125,7 +133,7 @@ export default function Page({ params }: PageProps) {
       <Card className="text-center">
         <CardContent>
           {quizz.fields.map((field, idx) => (
-            <Card key={idx} className="bg-background">
+            <Card key={idx} className="mb-4 bg-background">
               <CardContent>
                 <h1 className="mb-8 text-2xl">{field.question}</h1>
 
